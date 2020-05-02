@@ -1,6 +1,6 @@
-{ stdenv, fetchurl }:
+{ lib, mkFont, fetchurl }:
 
-stdenv.mkDerivation rec {
+mkFont rec {
   pname = "cascadia-code";
   version = "1911.21";
 
@@ -30,15 +30,7 @@ stdenv.mkDerivation rec {
 
   sourceRoot = ".";
 
-  installPhase = ''
-    install -Dm444 -t $out/share/fonts/truetype *.ttf
-  '';
-
-  outputHashAlgo = "sha256";
-  outputHashMode = "recursive";
-  outputHash = "1gkjs7qa409r4ykdy4ik8i0c3z49hzpklw6kyijhhifhyyyzhz4h";
-
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Monospaced font that includes programming ligatures and is designed to enhance the modern look and feel of the Windows Terminal";
     homepage = "https://github.com/microsoft/cascadia-code";
     license = licenses.ofl;

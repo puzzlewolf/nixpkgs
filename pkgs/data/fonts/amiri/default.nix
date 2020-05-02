@@ -1,20 +1,13 @@
-{ lib, fetchzip }:
+{ lib, fetchzip, mkFont }:
 
-let
+mkFont rec {
   version = "0.112";
-
-in fetchzip rec {
   name = "Amiri-${version}";
 
-  url = "https://github.com/alif-type/amiri/releases/download/${version}/${name}.zip";
-
-  sha256 = "13j8kglgca296czxjz1xvrbz6yx05s2xassiliyszndbkrhn6bkl";
-
-  postFetch = ''
-    unzip $downloadedFile
-    install -m444 -Dt $out/share/fonts/truetype ${name}/*.ttf
-    install -m444 -Dt $out/share/doc/${name}    ${name}/{*.txt,*.pdf}
-  '';
+  src = fetchzip {
+    url = "https://github.com/alif-type/amiri/releases/download/${version}/${name}.zip";
+    sha256 = "0simwv5yhv74z95lkf6pfp107a93nlh43can4y1flpx99hz4riyi";
+  };
 
   meta = with lib; {
     description = "A classical Arabic typeface in Naskh style";
