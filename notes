@@ -28,3 +28,45 @@ dejavu: ?
 dina: ?
 
 dosemu: ?
+
++++++++++++++++++++++
+
+xits-math: builds the font
+
+wqy_zenhei: ttc
+
+wqy_microhei: ttc
+
+weather-icons, victor-mono: path, too many fonts in repo, see fira
+
+vista-fonts-chs-1, vista-fonts-1: download exe, cabextract
+
+vegur-font: nice postFetch solution
+
+uw-ttyp0, unscii, tewi-font, terminus-font, tamzen-font, tamsyn: multi output, complicated build
+
+unifont_upper: one ttf, license is text
+
+unifont: multi output, multiple src
+
+uni-vga: ?
+
+ucs-fonts: ?
+
+twitter-color-emoji: ?
+
+twemoji-color-font: ?
+
+ttf-envy-code-r: odd name
+
+ttf-bitstream-vera: empty meta
+
+tlwg: built with mkDerivation, makes sense like this
+
+tipa: for TEX, installs to texmf-dist
+
+terminus-font-ttf: output dir, license COPYING
+
+tempora-lgc: ?
+
+

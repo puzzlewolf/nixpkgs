@@ -9,6 +9,9 @@ stdenv.mkDerivation ({
   dontFixup = true;
 
   installPhase = ''
+    find
+    rm -rf __MACOSX
+    find -iname '*.ttc' -print0 | xargs -0 -r install -v -m644 --target $out/share/fonts/truetype/ -D
     find -iname '*.ttf' -print0 | xargs -0 -r install -v -m644 --target $out/share/fonts/truetype/ -D
     find -iname '*.otf' -print0 | xargs -0 -r install -v -m644 --target $out/share/fonts/opentype/ -D
     find -iname '*.eot' -print0 | xargs -0 -r install -v -m644 --target $out/share/fonts/eot/ -D
