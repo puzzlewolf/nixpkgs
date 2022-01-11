@@ -1,23 +1,63 @@
-{ lib, stdenv, fetchsvn, cmake, gcc, pkg-config, fftwFloat, alsa-lib
-, zlib, wavpack, wxGTK31, udev, jackaudioSupport ? false, libjack2
-, includeDemo ? true }:
+{ alsa-lib
+, cmake
+, docbook_xsl
+, fetchFromGitHub
+, fftwFloat
+, gcc
+, gettext
+, imagemagick
+, includeDemo ? true
+, jackaudioSupport ? false
+, lib
+, libjack2
+, libxslt
+, perlPackages
+, pkg-config
+, stdenv
+, udev
+, wavpack
+, wxGTK31
+, zip
+, zlib
+}:
 
 stdenv.mkDerivation rec {
   pname = "grandorgue";
-  rev = "2333";
-  version = "0.3.1-r${rev}";
-  src = fetchsvn {
-    url = "https://svn.code.sf.net/p/ourorgan/svn/trunk";
-    inherit rev;
-    sha256 = "0xzjdc2g4gja2lpmn21xhdskv43qpbpzkbb05jfqv6ma2zwffzz1";
+  version = "3.5.0-1";
+
+  src = fetchFromGitHub {
+    owner = "GrandOrgue";
+    repo = "grandorgue";
+    rev = version;
+    hash = "sha256:13hb4328cym9n4kwv3i1c1cl6pkayl90rl6c4j1wa8szhwm49300";
+    fetchSubmodules = true;
   };
 
-  nativeBuildInputs = [ cmake pkg-config ];
+  nativeBuildInputs = [
+    cmake
+    docbook_xsl
+    gettext
+    imagemagick
+    libxslt
+    perlPackages.Po4a
+    pkg-config
+    zip
+  ];
 
-  buildInputs = [ pkg-config fftwFloat alsa-lib zlib wavpack wxGTK31 udev ]
-    ++ lib.optional jackaudioSupport libjack2;
+  buildInputs = [
+    alsa-lib
+    fftwFloat
+    pkg-config
+    udev
+    wavpack
+    wxGTK31
+    zlib
+  ] ++ lib.optional jackaudioSupport libjack2;
 
-  cmakeFlags = lib.optional (!jackaudioSupport) [
+  cmakeFlags = [
+    "-DDOCBOOK_DIR=${docbook_xsl}/share/xml/docbook-xsl-nons"
+  ] ++ lib.optional (!jackaudioSupport) [
+    "-DGO_USE_JACK=OFF"
     "-DRTAUDIO_USE_JACK=OFF"
     "-DRTMIDI_USE_JACK=OFF"
   ] ++ lib.optional (!includeDemo) "-DINSTALL_DEMO=OFF";
