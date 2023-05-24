@@ -19,7 +19,7 @@ rustPlatform.buildRustPackage rec {
   src = fetchFromGitLab {
     owner = "sequoia-pgp";
     repo = "sequoia-octopus-librnp";
-    rev = "v1.2.1";
+    rev = "v${version}";
     hash = "sha256:1xmijvkgqqq35amjnnpccflqq2nz6w9jcnmyvp1c20wm8prrdkng";
   };
 
@@ -28,13 +28,12 @@ rustPlatform.buildRustPackage rec {
   # Rust *-sys packages, like nettle-sys, require this to be set.
   LIBCLANG_PATH = "${llvmPackages.libclang.lib}/lib";
 
-  buildInputs = [ openssl sqlite nettle ];
-
   nativeBuildInputs = [ pkg-config cargo rustc llvmPackages.clang capnproto ];
 
+  buildInputs = [ openssl sqlite nettle ];
+
   meta = with lib; {
-    description =
-      "A Sequoia-based OpenPGP Backend for Thunderbird";
+    description = "A Sequoia-based OpenPGP Backend for Thunderbird";
     homepage = "https://gitlab.com/sequoia-pgp/sequoia-octopus-librnp";
     license = licenses.lgpl2Plus;
     maintainers = with maintainers; [ puzzlewolf ];
