@@ -79,7 +79,7 @@ python3.pkgs.buildPythonApplication (finalAttrs: {
   meta = {
     description = "Software for technical documentation and requirements management";
     homepage = "https://github.com/strictdoc-project/strictdoc";
-    changelog = "https://github.com/strictdoc-project/strictdoc/blob/${finalAttrs.src.tag}/CHANGELOG.md";
+    changelog = "https://strictdoc.readthedocs.io/en/stable/stable/docs/strictdoc_04_release_notes.html";
     license = lib.licenses.asl20;
     maintainers = [ lib.maintainers.puzzlewolf ];
     mainProgram = "strictdoc";
